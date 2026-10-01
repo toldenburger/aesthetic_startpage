@@ -6,6 +6,10 @@
   --card-color: color-mix(in srgb, rgb(35, 35, 35) 90.2%, var(--background-color));
 }
 
+/* Libron everywhere (html body beats the themes' body rule); form controls don't inherit fonts by default */
+html body { font-family: "Libron", serif; }
+input, select, button, textarea { font-family: inherit; }
+
 /* link lists: tighter than the theme so ~20 links fit the fixed-height card */
 .content .links { font-size: 17px; gap: 1rem; margin-top: 0.5rem; }
 .content .links section { gap: 0.4rem; }
@@ -71,7 +75,7 @@ body.editing .folder_tab.active::after { content: " ✎"; }
   border: none;
   background: var(--card-color);
   color: aliceblue;
-  font-family: "Source Code Pro", monospace;
+  font-family: "Libron", serif;
   box-shadow: 0 0 40px black;
 }
 .editor::backdrop { background: rgba(0, 0, 0, 0.55); }
@@ -119,3 +123,11 @@ body.editing .folder_tab.active::after { content: " ✎"; }
 .editor_buttons button[hidden] { display: none; }
 .editor_error { padding: 0 22px 16px; color: rgb(255, 120, 120); font-size: 14px; }
 .editor_error[hidden] { display: none; }
+
+/* titles in Libron's real small caps (last, so the `font: inherit` shorthands above don't reset it) */
+.links h3,
+.folder_tab,
+.editor_form h3,
+.editor_modes button {
+  font-variant-caps: small-caps;
+}

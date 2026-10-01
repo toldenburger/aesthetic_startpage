@@ -12,6 +12,7 @@ A new tab page for Chromium-based browsers (made for [Helium](https://helium.com
   - **✎**: edit mode. Click a link to rename, move or delete it; click a section heading to rename or delete it; click the open tab to rename, re-theme or delete that page.
   - **Toolbar button**: adds the site you're on to the page and section you choose.
   - **Backup**: export your pages to a JSON file, or import one.
+- **Typeface**: set in [Libron](https://github.com/nicoverbruggen/libron) (bundled, no web font service), with its real small caps for all titles.
 - Fixed the "animated-gradient" theme, which threw an error in the original menu.
 
 The original single-file page (`index.html`) and its README (`README.original.md`) are still here, untouched.
@@ -75,8 +76,11 @@ A page fits about 20 links before the fixed-height card runs out of room.
 | `store.js` | page data storage, shared by both |
 | `pages.default.json` | example pages for a fresh install |
 | `page_images/` | extra gifs pages can use (copied from the original project's themes) |
+| `fonts/` | the Libron web fonts, its license, and `libron.css` |
 | `main-themes/`, `new-themes/`, `template-theme/`, `index.html` | the original project |
 
 ## Credits and license
 
-Based on [Nainish-Rai/Aesthetic-Startpage](https://github.com/Nainish-Rai/Aesthetic-Startpage) and the people who contributed themes to it. Like the original, this project is licensed under the **GNU General Public License v3.0** (see `LICENSE`). Changes made in this fork are listed under "What's different" above.
+Based on [Nainish-Rai/Aesthetic-Startpage](https://github.com/Nainish-Rai/Aesthetic-Startpage) and the people who contributed themes to it.
+
+The typeface is [Libron](https://github.com/nicoverbruggen/libron) by Nico Verbruggen, licensed under the SIL Open Font License 1.1 (`fonts/libron/LICENSE`). Like the original, this project is licensed under the **GNU General Public License v3.0** (see `LICENSE`). Changes made in this fork are listed under "What's different" above.
