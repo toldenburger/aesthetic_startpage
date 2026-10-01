@@ -124,10 +124,12 @@ body.editing .folder_tab.active::after { content: " ✎"; }
 .editor_error { padding: 0 22px 16px; color: rgb(255, 120, 120); font-size: 14px; }
 .editor_error[hidden] { display: none; }
 
-/* titles in Libron's real small caps (last, so the `font: inherit` shorthands above don't reset it) */
+/* titles in Libron's small caps, capitals included, so no larger first letter
+   (last, so the `font: inherit` shorthands above don't reset it) */
 .links h3,
 .folder_tab,
 .editor_form h3,
 .editor_modes button {
-  font-variant-caps: small-caps;
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.08em;
 }

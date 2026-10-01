@@ -12,7 +12,7 @@ A new tab page for Chromium-based browsers (made for [Helium](https://helium.com
   - **✎**: edit mode. Click a link to rename, move or delete it; click a section heading to rename or delete it; click the open tab to rename, re-theme or delete that page.
   - **Toolbar button**: adds the site you're on to the page and section you choose.
   - **Backup**: export your pages to a JSON file, or import one.
-- **Typeface**: set in [Libron](https://github.com/nicoverbruggen/libron) (bundled, no web font service), with its real small caps for all titles.
+- **Typeface**: set in [Libron](https://github.com/nicoverbruggen/libron) (bundled, no web font service), with all titles in its real small caps (no larger first letter).
 - Fixed the "animated-gradient" theme, which threw an error in the original menu.
 
 The original single-file page (`index.html`) and its README (`README.original.md`) are still here, untouched.
