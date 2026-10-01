@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Add to startpage</title>
+    <style>
+      body {
+        width: 320px;
+        margin: 0;
+        padding: 16px 18px 18px;
+        background: rgb(35, 35, 35);
+        color: aliceblue;
+        font-family: "Source Code Pro", monospace;
+        font-size: 14px;
+      }
+      h1 { margin: 0 0 12px; font-size: 15px; font-weight: 600; color: rgb(255, 157, 72); letter-spacing: 0.08em; }
+      form { display: flex; flex-direction: column; gap: 10px; }
+      label { display: grid; grid-template-columns: 5.5rem 1fr; align-items: center; color: rgba(240, 248, 255, 0.75); }
+      label[hidden] { display: none; }
+      input, select {
+        min-width: 0;
+        padding: 4px 2px;
+        border: none; border-bottom: 1px solid rgba(240, 248, 255, 0.3);
+        background: transparent; color: aliceblue;
+        font: inherit;
+      }
+      select option { background: rgb(35, 35, 35); }
+      input:focus, select:focus { outline: none; border-bottom-color: rgb(255, 157, 72); }
+      button {
+        align-self: flex-end;
+        padding: 5px 16px;
+        border: 1px solid rgb(255, 157, 72); cursor: pointer;
+        background: none; color: rgb(255, 157, 72);
+        font: inherit;
+      }
+      #status { margin: 10px 0 0; color: rgba(240, 248, 255, 0.75); }
+      #status:empty { display: none; }
+    </style>
+  </head>
+  <body>
+    <h1>add to startpage</h1>
+    <form id="form">
+      <label>name <input name="link_name" required autocomplete="off" /></label>
+      <label>url <input name="url" required autocomplete="off" /></label>
+      <label>page <select name="page"></select></label>
+      <label>section <select name="section"></select></label>
+      <label class="new_section" hidden>new section <input name="new_section" autocomplete="off" /></label>
+      <button type="submit">add</button>
+    </form>
+    <p id="status"></p>
+    <script src="store.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,96 @@
+{
+  "pages": [
+    {
+      "id": "start",
+      "name": "start",
+      "theme": "blue",
+      "image": null,
+      "sections": [
+        {
+          "title": "Daily",
+          "links": [
+            {
+              "name": "Youtube",
+              "url": "https://www.youtube.com/"
+            },
+            {
+              "name": "Github",
+              "url": "https://github.com"
+            },
+            {
+              "name": "Whatsapp",
+              "url": "https://web.whatsapp.com/"
+            },
+            {
+              "name": "Telegram",
+              "url": "https://web.telegram.org/z/"
+            }
+          ]
+        },
+        {
+          "title": "Social",
+          "links": [
+            {
+              "name": "Twitter",
+              "url": "https://twitter.com/"
+            },
+            {
+              "name": "Reddit",
+              "url": "https://www.reddit.com/"
+            },
+            {
+              "name": "Instagram",
+              "url": "https://Instagram.com"
+            },
+            {
+              "name": "Discord",
+              "url": "https://discord.com/app"
+            }
+          ]
+        },
+        {
+          "title": "Coding",
+          "links": [
+            {
+              "name": "W3School",
+              "url": "https://www.w3schools.com/"
+            },
+            {
+              "name": "LeetCode",
+              "url": "https://leetcode.com"
+            },
+            {
+              "name": "HackerRank",
+              "url": "https://hackerrank.com"
+            },
+            {
+              "name": "FreeCodeCamp",
+              "url": "https://FreeCodeCamp.org"
+            }
+          ]
+        },
+        {
+          "title": "Google",
+          "links": [
+            {
+              "name": "Gmail",
+              "url": "https://mail.google.com/mail/u/0/"
+            },
+            {
+              "name": "Drive",
+              "url": "https://drive.google.com"
+            },
+            {
+              "name": "Maps",
+              "url": "https://maps.google.com"
+            },
+            {
+              "name": "Custom",
+              "url": "https://github.com/Nainish-Rai"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

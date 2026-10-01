@@ -1,0 +1,121 @@
+/* Additions on top of the theme stylesheets: folder tabs, editing, editor dialog */
+
+:root {
+  /* opaque copy of the card's rgba(35,35,35,0.902)-over-glow colour; a translucent
+     tab would look darker because it sits in the card's drop shadow */
+  --card-color: color-mix(in srgb, rgb(35, 35, 35) 90.2%, var(--background-color));
+}
+
+/* link lists: tighter than the theme so ~20 links fit the fixed-height card */
+.content .links { font-size: 17px; gap: 1rem; margin-top: 0.5rem; }
+.content .links section { gap: 0.4rem; }
+.content { transition: opacity 0.15s ease; }
+.content.switching { opacity: 0; }
+.links .empty { color: rgba(240, 248, 255, 0.5); font-size: 15px; line-height: 1.6; }
+
+/* folders: the card is a folder with a tab per page on its top edge;
+   the open page's tab is in front, the others nestle behind it */
+.maincard { position: relative; overflow: visible; }
+.folder_tabs {
+  position: absolute; bottom: 100%; right: 64px;
+  display: flex; align-items: flex-end;
+}
+.folder_tab {
+  position: relative; z-index: 1;
+  margin-left: -14px;
+  padding: 3px 26px 2px;
+  border: none; cursor: pointer;
+  background-color: color-mix(in srgb, var(--card-color) 72%, black);
+  clip-path: polygon(12px 0, calc(100% - 12px) 0, 100% 100%, 0 100%);
+  /* each tab's text is its own page's heading colour, set by newtab.js */
+  color: var(--tab-color, rgba(240, 248, 255, 0.6));
+  font: inherit; font-size: 14px; letter-spacing: 0.12em;
+  user-select: none;
+}
+.folder_tab:first-child { margin-left: 0; }
+.folder_tab:not(.active):hover { filter: brightness(1.35); }
+.folder_tab.active {
+  z-index: 2; cursor: default;
+  padding: 5px 26px 3px;
+  background-color: var(--card-color);
+  color: var(--tab-color, var(--link-heading));
+}
+
+/* add / edit buttons in the card's bottom-right corner */
+.card_tools {
+  position: absolute; right: 18px; bottom: 16px;
+  display: flex; gap: 0.3rem;
+}
+.card_tools button {
+  display: grid; place-items: center;
+  width: 30px; height: 30px;
+  background: none; border: none; cursor: pointer;
+  color: aliceblue; opacity: 0.4;
+  transition: opacity 0.15s, color 0.15s;
+}
+.card_tools button:hover { opacity: 1; color: var(--link-hover); }
+body.editing #edit_button { opacity: 1; color: var(--link-heading); }
+
+/* edit mode: links and the open tab become editable */
+body.editing .links a,
+body.editing .links h3 { cursor: pointer; outline: 1px dashed rgba(240, 248, 255, 0.25); outline-offset: 2px; }
+body.editing .links a:hover { transform: none; }
+body.editing .folder_tab.active { cursor: pointer; }
+body.editing .folder_tab.active::after { content: " ✎"; }
+
+/* editor dialog */
+.editor {
+  width: min(420px, calc(100vw - 32px));
+  margin: auto;
+  padding: 0;
+  border: none;
+  background: var(--card-color);
+  color: aliceblue;
+  font-family: "Source Code Pro", monospace;
+  box-shadow: 0 0 40px black;
+}
+.editor::backdrop { background: rgba(0, 0, 0, 0.55); }
+.editor_modes { display: flex; }
+.editor_modes button {
+  flex: 1; padding: 8px 0;
+  border: none; cursor: pointer;
+  background: color-mix(in srgb, var(--card-color) 72%, black);
+  color: rgba(240, 248, 255, 0.6);
+  font: inherit; font-size: 14px; letter-spacing: 0.1em;
+}
+.editor_modes button.active { background: transparent; color: var(--link-heading); }
+.editor_modes[hidden] { display: none; }
+/* font-size/colour reset: the themes style every <form> like the big search bar */
+.editor_form { display: flex; flex-direction: column; gap: 0.8rem; padding: 18px 22px 20px; font-size: 15px; color: aliceblue; }
+.editor_form[hidden] { display: none; }
+.editor_form h3 { color: var(--link-heading); font-size: 16px; font-weight: 600; letter-spacing: 0.06em; }
+.editor_form p { font-size: 14px; line-height: 1.5; color: rgba(240, 248, 255, 0.75); }
+.editor_form label {
+  display: grid; grid-template-columns: 7rem 1fr; align-items: center;
+  font-size: 14px; color: rgba(240, 248, 255, 0.75);
+}
+.editor_form label[hidden] { display: none; }
+.editor_form input,
+.editor_form select {
+  min-width: 0;
+  padding: 4px 2px;
+  border: none; border-bottom: 1px solid rgba(240, 248, 255, 0.3);
+  background: transparent; color: aliceblue;
+  font: inherit; font-size: 15px;
+}
+.editor_form select option { background: rgb(35, 35, 35); }
+.editor_form input:focus,
+.editor_form select:focus { outline: none; border-bottom-color: var(--link-heading); }
+.editor_buttons { display: flex; justify-content: flex-end; gap: 0.6rem; margin-top: 0.4rem; }
+.editor_buttons button {
+  padding: 5px 14px;
+  border: 1px solid rgba(240, 248, 255, 0.3); cursor: pointer;
+  background: none; color: aliceblue;
+  font: inherit; font-size: 14px;
+}
+.editor_buttons button:hover { border-color: var(--link-hover); color: var(--link-hover); }
+.editor_buttons button[type="submit"] { border-color: var(--link-heading); color: var(--link-heading); }
+.editor_buttons .danger { margin-right: auto; color: rgb(255, 120, 120); border-color: rgba(255, 120, 120, 0.5); }
+.editor_buttons button[hidden] { display: none; }
+.editor_error { padding: 0 22px 16px; color: rgb(255, 120, 120); font-size: 14px; }
+.editor_error[hidden] { display: none; }

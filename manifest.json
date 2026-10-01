@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Aesthetic Startpage",
+  "version": "2.0",
+  "description": "Aesthetic new tab page with folder-style pages you can edit in place. Based on Nainish-Rai/Aesthetic-Startpage.",
+  "chrome_url_overrides": { "newtab": "newtab.html" },
+  "permissions": ["storage", "activeTab"],
+  "action": {
+    "default_title": "Add this page to the startpage",
+    "default_popup": "popup.html"
+  }
+}

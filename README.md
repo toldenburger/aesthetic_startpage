@@ -1,102 +1,82 @@
-# aesthetic-startpage
-Aesthetic Startpage to boost your productivity and at the same time give your desktop a new aesthetic look.
-Here is a [Live Preview](https://nainish-startpage.netlify.app/)
+# aesthetic startpage — folders edition
 
+A new tab page for Chromium-based browsers (made for [Helium](https://helium.computer/), works in Chrome, Chromium, Brave, …) built on top of **[Aesthetic Startpage](https://github.com/Nainish-Rai/Aesthetic-Startpage) by [Nainish Rai](https://github.com/Nainish-Rai)**. All the themes, gifs and the original look come from that project; this fork turns it into a browser extension with multiple pages you can edit in place.
 
-**NOTE!!!!!!!!!**
-We are developing a productivity SaaS platform that combines a clean, minimalist design with anime-inspired nature themes. The goal is to create a serene and engaging digital workspace that helps users streamline their tasks, organize their thoughts, and boost their overall productivity.
+## What's different from the original
 
-**Key Features**
-Personalized start page with customizable widgets for bookmarks, notes, to-do lists, weather, and time
-Intuitive bookmark management system for saving, organizing, and accessing bookmarks
-Note-taking feature with Markdown support and a clean, minimalist interface
-Task management system with due dates, priorities, and integration with external services
-AI-powered chatbot for assistance with queries, task management, and information retrieval
-Aesthetic, modern UI with a consistent brand identity across all features
-AI-enhanced search engine for quick and relevant information retrieval
-Personal mood board 
+- **Installs as the new tab page** (a small Manifest V3 extension) instead of a homepage URL.
+- **Folders**: the card is a paper folder with a tab per page on its top edge. Click a tab to open that page; the open one sits in front, the others nestle behind it.
+- **A theme per page**: the ☰ menu changes the theme of the page that's open. Each tab's label is drawn in its own page's colour.
+- **Edit in place**, no HTML editing needed:
+  - **＋** (bottom-right of the card): add a bookmark (name, url, page, section) or a new page (name, theme, image). Pick "+ new section…" to start a new section.
+  - **✎**: edit mode. Click a link to rename, move or delete it; click a section heading to rename or delete it; click the open tab to rename, re-theme or delete that page.
+  - **Toolbar button**: adds the site you're on to the page and section you choose.
+  - **Backup**: export your pages to a JSON file, or import one.
+- Fixed the "animated-gradient" theme, which threw an error in the original menu.
 
-**Design Inspiration**
-The design of the SaaS platform will be inspired by minimalist aesthetics and nature-themed anime. We aim to create a clean, visually appealing interface that resonates with users who appreciate simplicity and whimsy. The color palette will be inspired by natural elements like water, leaves, and clouds, and the overall look and feel will be calming and inviting.
-Monetization
+The original single-file page (`index.html`) and its README (`README.original.md`) are still here, untouched.
 
-**We are looking for developers, designers and dreamers**
-Suggest your ideas on what features we all can add, designs, and I welcome you all to contribute and create this ultimate opensource start space. 
+## Install
 
-## Installation
-##### Method 1:
-1. Download/Clone this repository.
-2. Open folder of theme you want to use.
-3. Open index.html file using a web browser.
-4. Copy the url path from the url bar.
-5. Go to web browser's homepage settings.
-6. Select Custom url homepage and paste the url.
+1. Clone the repo somewhere permanent:
+   ```sh
+   git clone https://github.com/toldenburger/aesthetic_startpage.git ~/.local/share/aesthetic_startpage
+   ```
+2. Load it as an unpacked extension: open `chrome://extensions`, switch on **Developer mode**, click **Load unpacked** and pick the folder.
+3. Open a new tab. If the browser asks whether to keep the changed new tab page, choose **Keep**.
 
-##### Method 2:
-- Copy this Page [link](https://nainish-startpage.netlify.app/) and use it as custom url homepage
+### Loading it from a flags file (Helium on Arch)
 
-### Changing-Themes 
-- You can change theme using the menu given at top-right corner.
-- You can use a specific-theme by using method-1.
+Instead of step 2 you can let the browser load it on every start. For `helium-browser-bin`, put this in `~/.config/helium-browser-flags.conf`:
 
-## Themes:
-### Purple-Mesh
-![Screenshot from 2022-10-04 22-50-35](https://user-images.githubusercontent.com/109546113/193884959-fde95cd2-fe52-4c2a-8f22-91b2bc83ed6a.png)
-### Orange
-![Screenshot from 2022-10-04 22-59-26](https://user-images.githubusercontent.com/109546113/193887457-1923a57d-879d-4145-9add-f7800960ff6f.png)
+```
+--disable-features=DisableLoadExtensionCommandLineSwitch
+--load-extension=/home//<you>/.local/share/aesthetic_startpage
+```
 
-### Blue
-![Screenshot from 2022-10-04 22-59-39](https://user-images.githubusercontent.com/109546113/193887481-973a2c77-909e-4f70-b49c-a9cc9c869ea1.png)
+The double slash in `/home//<you>` is deliberate: the `helium-browser` launcher script rewrites any literal `/home/<you>` in that file into `~`, which breaks the path. The flags only take effect after the browser has fully quit (including web-app windows) and restarted.
 
-### Green
-![Screenshot from 2022-10-04 22-59-52](https://user-images.githubusercontent.com/109546113/193887509-a5969dfe-17a4-429c-b337-f8d3589306d2.png)
+## Your pages
 
-### Cherry
-![Screenshot from 2022-10-04 23-00-04](https://user-images.githubusercontent.com/109546113/193887547-87a580f8-b32d-478e-a96c-967eca69afbc.png)
+Pages and bookmarks are stored in the browser (`chrome.storage.local`). On first run they're seeded from:
 
+1. `my_pages.json` if it exists. It is **git-ignored**, so your personal bookmarks never end up on GitHub. Use **＋ › backup › export** to save one.
+2. otherwise `pages.default.json`, the example page that ships with the repo.
 
-### Purple
-![Screenshot from 2022-10-04 23-00-35](https://user-images.githubusercontent.com/109546113/193887582-95498fcf-ca59-49bc-a128-960b7439ee8b.png)
+The format is simple enough to edit by hand:
 
+```json
+{
+  "pages": [
+    {
+      "id": "start",
+      "name": "start",
+      "theme": "blue",
+      "image": null,
+      "sections": [
+        { "title": "Daily", "links": [{ "name": "Github", "url": "https://github.com" }] }
+      ]
+    }
+  ]
+}
+```
 
-#### Feel free to make new colour themes and improvements <3
-#### Also don't forget to star the repo :)
+`theme` is one of the folder names in `main-themes/`. `image` is `null` (use the theme's own gif) or a path such as `./page_images/zines.gif`. To make your own gif selectable in the page editor, drop it into `page_images/` and add it to the `IMAGES` list in `store.js`.
 
+A page fits about 20 links before the fixed-height card runs out of room.
 
+## Files
 
-## Create new themes using template theme
+| file | what it is |
+| --- | --- |
+| `manifest.json` | the extension: new tab override and toolbar button |
+| `newtab.html`, `newtab.css`, `newtab.js` | the new tab page and its editor |
+| `popup.html`, `popup.js` | the toolbar button's "add this page" form |
+| `store.js` | page data storage, shared by both |
+| `pages.default.json` | example pages for a fresh install |
+| `page_images/` | extra gifs pages can use (copied from the original project's themes) |
+| `main-themes/`, `new-themes/`, `template-theme/`, `index.html` | the original project |
 
-### Forking the Repository
+## Credits and license
 
-1. Follow [this tutorial](https://github.com/firstcontributions/first-contributions "this tutorial") till **`Create a Branch`**.
-
-### Creating a New Theme
-
-#### Using the template
-
-1. Navigate to `aesthetic-startpage\template-theme\normal` in your desktop.
-
-2. Copy all the files and folders (`index.html`, `style.css`, `images`).
-
-3. Now navigate to `aesthetic-startpage\new-themes\` in your desktop.
-
-4. Create a new folder and give it a unique theme name of your choice.
-
-5. Paste the previously copied files and folder inside the new folder you created.
-
-#### Changing the aesthetic
-
-1. Open `style.css` in your preferred ide or text editor.
-
-2. Inside `:root` change the `rgb` values for different variables.
-
-![guide](https://user-images.githubusercontent.com/90842071/194304604-9a33b75a-432f-47f7-b810-2142da53d2b5.jpg)
-
-3. If you want to add gradient, you can add it inside `.bg`
-
-4. To add new image, navigate to `images` inside the folder you created and replace the existing image with the one you want. Rename the image to `gif.gif`. If the image is not gif you can convert it by using MS Paint (save as `gif.gif`) or any other software.
-
-### Committing and Pushing the changes
-
-1. Follow rest of [this tutorial](https://github.com/firstcontributions/first-contributions "this tutorial") from where you have left.
-
+Based on [Nainish-Rai/Aesthetic-Startpage](https://github.com/Nainish-Rai/Aesthetic-Startpage) and the people who contributed themes to it. Like the original, this project is licensed under the **GNU General Public License v3.0** (see `LICENSE`). Changes made in this fork are listed under "What's different" above.
